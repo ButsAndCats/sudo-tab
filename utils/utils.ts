@@ -1,4 +1,5 @@
 import * as Link from "../components/Tiles/Link";
+import * as Search from "../components/Tiles/Search";
 import { SettingsSchema } from "../types";
 
 export const isLightColor = (bgColor: string): boolean => {
@@ -13,11 +14,13 @@ export const isLightColor = (bgColor: string): boolean => {
 
 export const getTileSettingsSchema = (type: keyof TileSchemaMap): Array<SettingsSchema> => {
   const tileSchemaMap: TileSchemaMap = {
-    Link: Link.schema
+    Link: Link.schema,
+    Search: Search.schema,
   }
   return tileSchemaMap[type]
 }
 
 type TileSchemaMap = {
   Link: Array<SettingsSchema>
+  Search: Array<SettingsSchema>
 }

@@ -33,7 +33,7 @@ export const ModalProvider: React.FC = ({ children }) => {
       {children}
       <div className={`fixed inset-0 z-20 flex items-center justify-center ${Boolean(modal) ? "block" : "hidden pointer-events-none"}`}>
         <div className={`bg-gray opacity-40 absolute inset-0`} onClick={() => setModal(null)}/>
-        <div className="bg-gray p-8 rounded shadow z-20">
+        <div className="bg-gray p-8 rounded-lg shadow z-20">
           {modal}
         </div> 
       </div>

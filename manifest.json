@@ -1,0 +1,12 @@
+{
+  "name": "Sudo Tab!",
+  "short_name": "ST!",
+  "description": "The new tab page for power users!",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "version": "1.0",
+  "permissions": ["storage", "chrome://favicon/"],
+  "optional_permissions": ["tabs", "topSites", "management", "bookmarks"],
+  "manifest_version": 2
+}

@@ -1,11 +1,11 @@
 
-export const Add: React.FC = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+export const Add: React.FC<Props> = ({ size = 32 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size}>
     <path fill="currentColor" d="M30 14H18V2h-4v12H2v4h12v12h4V18h12v-4z" />
   </svg>
 )
 
-export const Delete: React.FC<{ size?: number }> = ({ size = 32 }) => (
+export const Delete: React.FC<Props> = ({ size = 32 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 32 32">
     <g fill="currentColor">
       <path d="M4 9v19a3.957 3.957 0 004 4h16a3.957 3.957 0 004-4V9zm7 17H9V15h2zm6 0h-2V15h2zm6 0h-2V15h2z"/>
@@ -14,19 +14,19 @@ export const Delete: React.FC<{ size?: number }> = ({ size = 32 }) => (
   </svg>
 )
 
-export const Drag: React.FC<{ size?: number }> = ({ size = 32 }) => (
+export const Drag: React.FC<Props> = ({ size = 32 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 32 32">
     <path d="M29.5 3A1.5 1.5 0 0028 4.5V14a1 1 0 01-1 1 1 1 0 01-1-1V3.107a2.074 2.074 0 00-1.664-2.08A2 2 0 0022 3v11a1 1 0 01-1 1 1 1 0 01-1-1V2.107a2.074 2.074 0 00-1.664-2.08A2 2 0 0016 2v12a1 1 0 01-1 1 1 1 0 01-1-1V3.107a2.074 2.074 0 00-1.664-2.08A2 2 0 0010 3v15.586a1 1 0 01-1.707.707l-4.01-4.01a2.163 2.163 0 00-2.461-.478 2.065 2.065 0 00-.884 2.863L6.133 26.9a10 10 0 008.716 5.1H21a10 10 0 0010-10V4.5A1.5 1.5 0 0029.5 3z" fill="currentColor"/>
   </svg>
 )
 
-export const Github: React.FC<{ size?: number }> = ({ size = 32 }) => (
+export const Github: React.FC<Props> = ({ size = 32 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 32 32">
     <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M16 .4C7.2.4 0 7.6 0 16.4c0 7.1 4.6 13.1 10.9 15.2.8.1 1.1-.3 1.1-.8v-2.7c-4.5 1-5.4-2.1-5.4-2.1-.7-1.8-1.8-2.3-1.8-2.3-1.5-1 .1-1 .1-1 1.6.1 2.5 1.6 2.5 1.6 1.4 2.4 3.7 1.7 4.7 1.3.1-1 .6-1.7 1-2.1-3.6-.4-7.3-1.8-7.3-7.9 0-1.7.6-3.2 1.6-4.3-.2-.4-.7-2 .2-4.2 0 0 1.3-.4 4.4 1.6 1.3-.4 2.6-.5 4-.5s2.7.2 4 .5C23.1 6.6 24.4 7 24.4 7c.9 2.2.3 3.8.2 4.2 1 1.1 1.6 2.5 1.6 4.3 0 6.1-3.7 7.5-7.3 7.9.6.5 1.1 1.5 1.1 3v4.4c0 .4.3.9 1.1.8C27.4 29.5 32 23.5 32 16.4c0-8.8-7.2-16-16-16z"/>
   </svg>
 )
 
-export const Settings: React.FC<{ size?: number }> = ({ size = 32 }) => (
+export const Settings: React.FC<Props> = ({ size = 32 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 32 32">
     <path
       d="M31.984 15.721a2.414 2.414 0 00-2.119-2.12l-2.477-.301a11.618 11.618 0 00-1.426-3.44l1.532-1.97a2.413 2.413 0 00-3.386-3.39l-1.97 1.532A11.618 11.618 0 0018.7 4.61l-.309-2.472a2.412 2.412 0 00-4.793 0L13.29 4.61a11.64 11.64 0 00-3.437 1.426L7.888 4.5A2.413 2.413 0 004.5 7.89l1.534 1.97a11.592 11.592 0 00-1.426 3.44l-2.473.309a2.413 2.413 0 000 4.793l2.473.308a11.608 11.608 0 001.426 3.438L4.5 24.11a2.413 2.413 0 003.388 3.39l1.97-1.532A11.618 11.618 0 0013.3 27.39l.309 2.472a2.412 2.412 0 004.792 0l.299-2.472a11.618 11.618 0 003.437-1.426l1.97 1.532A2.413 2.413 0 0027.5 24.11l-1.532-1.97a11.592 11.592 0 001.424-3.44l2.473-.309a2.412 2.412 0 002.119-2.67zM16 21a5 5 0 115-5 5 5 0 01-5 5z"
@@ -34,3 +34,22 @@ export const Settings: React.FC<{ size?: number }> = ({ size = 32 }) => (
     />
   </svg>
 )
+
+export const Spotify: React.FC<Props> = ({ size = 32 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 32 32">
+    <path fill="currentColor" d="M16 0C7.2 0 0 7.2 0 16s7.2 16 16 16 16-7.2 16-16S24.9 0 16 0zm7.4 23.1c-.3.5-.9.6-1.4.3-3.8-2.3-8.5-2.8-14.1-1.5-.6.2-1-.2-1.2-.7-.2-.6.2-1 .7-1.2 6.1-1.4 11.4-.8 15.5 1.8.6.2.7.8.5 1.3zm1.9-4.4c-.4.6-1.1.8-1.7.4-4.3-2.6-10.9-3.4-15.9-1.8-.6.2-1.4-.2-1.5-.8-.2-.7.1-1.4.8-1.5 5.8-1.8 13-.9 18 2.2.4.2.7 1 .3 1.5zm.1-4.5c-5.1-3-13.7-3.4-18.6-1.8-.8.2-1.6-.2-1.8-1-.2-.8.2-1.6 1-1.8 5.7-1.7 15-1.4 21 2.2.7.4 1 1.4.6 2.1-.5.5-1.4.7-2.2.3z"/>
+  </svg>
+)
+
+export const Netflix: React.FC<Props> = ({ size = 32 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 32 32">
+    <g fill="none" fill-rule="evenodd">
+      <path
+        d="M22.85 29.13c-1.532.284-3.09.37-4.702.596l-4.918-15.18v15.831c-1.532.17-2.929.396-4.38.623V2h4.085l5.589 16.454V2h4.326v27.13z"
+        fill="currentColor"
+      />
+    </g>
+  </svg>
+)
+
+type Props = { size?: number }

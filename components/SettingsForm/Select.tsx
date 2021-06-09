@@ -9,6 +9,7 @@ export const Select: React.FC<SettingsSchema.Select & { value: string }> = ({ la
       <select
         className="form-select w-full rounded py-3 border border-blue px-4 text-black focus:shadow-lg focus:ring focus:ring-blue focus:outline-none"
         name={id}
+        defaultValue={value}
       >
         {options?.map((option) => (
           <option value={option.value} key={option.value}>

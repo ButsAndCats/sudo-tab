@@ -52,7 +52,7 @@ const DraggableRow = ({ row, editing, handle }: RowProps) => {
     >
       {row.columns.map(({ id, tile }) => tile ? (
         <div key={id} className="flex-1 aspect-w-5 aspect-h-1">
-          <div className="h-full flex">
+          <div className="h-full flex px-1">
             <Tile
               id={id}
               row={row}

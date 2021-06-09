@@ -7,6 +7,7 @@ import { SettingsForm } from "../components/SettingsForm/SettingsForm";
 import { LinkSchema } from "../components/Tiles/Link";
 import { getTileSettingsSchema } from "../utils/utils";
 import { SettingsSchema } from "../types";
+import { SearchSchema } from "../components/Tiles/Search";
 
 const contextDefaultValues = {
   sidebar: null,
@@ -63,19 +64,34 @@ export const AppProvider: React.FC = ({ children }) => {
   }
 
   const handleSaveSettings = (elements: HTMLFormControlsCollection, schema: Array<SettingsSchema>, ids: [string, string]) => {
-    console.log(ids)
     setRows((prev) => {
       const next = prev.slice();
       const row = next.findIndex(({ id }) => id === ids[0]);
       const column = next[row].columns.findIndex(({ id }) => id === ids[1]);
       const schemaIds = schema.map(({ id }) => id);
-
-      schemaIds.forEach((id) => {
-        if (elements[id]) {
-          console.log(id)
-          next[row].columns[column].tile.schema[id] = elements[id].value
+      const elementsMap: Record<string, HTMLInputElement | HTMLSelectElement> = {};
+      Array.from(elements).forEach(element => {
+        const elem = element as HTMLInputElement | HTMLSelectElement;
+        if (elem.name !== "") {
+          elementsMap[elem.name] = elem;
         }
-      })
+      });
+      if (next) {
+        schemaIds.forEach((id) => {
+          if (elementsMap[id]) {
+            if (next[row].columns[column].tile?.schema) {
+              const schema = next[row].columns[column].tile?.schema
+              if (schema) {
+                {/* 
+                //@ts-ignore */}
+                next[row].columns[column].tile.schema[id] = elementsMap[id].value
+              }
+            }
+            
+          }
+        })
+      }
+      
       console.log(next)
       return next;
     });
@@ -157,7 +173,12 @@ export type TileData = {
 
 export type Adding = [string, string];
 
-export type TileSchemas = LinkSchema
+export type TileSchemas = TileSchemas.Link | TileSchemas.Search
+
+export namespace TileSchemas {
+  export type Link = LinkSchema
+  export type Search = SearchSchema
+}
 
 export type Row = {
   id: string

@@ -1,11 +1,13 @@
 import * as React from "react";
 import { AppContext, Row, TileData, TileSchemas } from "../providers/AppProvider";
 import { Link, LinkSchema } from "./Tiles/Link";
+import { Search, SearchSchema } from "./Tiles/Search";
 import { isLightColor } from "../utils/utils";
 import { Drag, Settings, Delete } from "../icons/Icons";
 
-const tileMap: Record<string, (props: TileSchemas) => JSX.Element> = {
-  Link: (props: LinkSchema) => <Link {...props} />
+const tileMap = {
+  Link: (props: TileSchemas.Link) => <Link {...props} />,
+  Search: (props: TileSchemas.Search) => <Search {...props} />,
 }
 
 export const Tile: React.FC<Props> = ({ id, tile, row }) => {
@@ -19,6 +21,8 @@ export const Tile: React.FC<Props> = ({ id, tile, row }) => {
       onMouseUp={() => setDragging(false)}
       className={`h-full w-full relative overflow-hidden rounded-lg float-left ${`${isLightColor(tile.schema.hex) ? "text-black" : "text-white"}`}`}
     >
+      {/* 
+      //@ts-ignore */}
       {tileMap[tile.schema.type](tile.schema)}
       {editing ? (
         <>
