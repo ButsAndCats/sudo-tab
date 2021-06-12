@@ -6,7 +6,7 @@ import { Add, Drag } from "../icons/Icons";
 
 export const Rows = ({ rows, editing }: RowsProps) => {
   return (
-    <Droppable droppableId="RowContainer">
+    <Droppable droppableId="RowContainer" type="Row" direction="vertical">
       {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
@@ -29,6 +29,7 @@ export const Rows = ({ rows, editing }: RowsProps) => {
               )}
             </Draggable>
           ))}
+          {provided.placeholder}
         </div>
       )}
     </Droppable>
@@ -44,35 +45,54 @@ const DraggableRow = ({ row, editing, handle }: RowProps) => {
   const { setSidebar } = React.useContext(AppContext);
   return (
     <div
-      key={row.id}
       className={`
         ${editing ? "border-gray hover:text-gray-light hover:border-gray-light" : "border-transparent"}
         transition border-4 border-dashed text-gray w-full rounded-lg text-gray-light py-2 px-1 flex mt-2 relative
       `}
     >
-      {row.columns.map(({ id, tile }) => tile ? (
-        <div key={id} className="flex-1 aspect-w-5 aspect-h-1">
-          <div className="h-full flex px-1">
-            <Tile
-              id={id}
-              row={row}
-              tile={tile}
-            />
-          </div>
-        </div>
-      ) : (
-        <div key={id} className="flex-1 aspect-w-5 aspect-h-1">
-          <button
-            type="button"
-            className={`${editing ? "px-1 outline-none focus:outline-none" : "invisible opacity-0 pointer-events-none"} transition`}
-            onClick={() => setSidebar?.([row.id, id])}
+      <Droppable droppableId={row.id} type="Column">
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            className="flex flex-1"
           >
-            <div className="transition border-4 border-dashed border-gray text-gray hover:border-gray-light hover:text-gray-light rounded-lg h-full flex items-center justify-center">
-              <Add />
-            </div>
-          </button>
-        </div>
-      ))}
+            {row.columns.map(({ id, tile }, index) => (
+              <Draggable draggableId={id} index={index} key={id}>
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    className="flex-1 aspect-w-5 aspect-h-1"
+                  >
+                    {tile ? (
+                      <div className="h-full flex px-1">
+                        <Tile
+                          id={id}
+                          row={row}
+                          tile={tile}
+                          handle={provided.dragHandleProps}
+                        />
+                      </div>
+                    ) : (
+                      <button
+                        {...provided.dragHandleProps}
+                        type="button"
+                        className={`${editing ? "px-1 outline-none focus:outline-none" : "invisible opacity-0 pointer-events-none"} transition`}
+                        onClick={() => setSidebar?.([row.id, id])}
+                      >
+                        <div className="transition border-4 border-dashed border-gray text-gray hover:border-gray-light hover:text-gray-light rounded-lg h-full flex items-center justify-center">
+                          <Add />
+                        </div>
+                      </button>
+                    )}
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       <RowHandle editing={editing} handle={handle} />
     </div>
   )

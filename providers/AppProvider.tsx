@@ -8,6 +8,7 @@ import { LinkSchema } from "../components/Tiles/Link";
 import { getTileSettingsSchema } from "../utils/utils";
 import { SettingsSchema } from "../types";
 import { SearchSchema } from "../components/Tiles/Search";
+import { DropResult } from "react-beautiful-dnd";
 
 const contextDefaultValues = {
   sidebar: null,
@@ -22,6 +23,7 @@ const contextDefaultValues = {
   handleDeleteTile: null,
   handleEditTile: null,
   handleSaveSettings: null,
+  handleDragEnd: null
 }
 export const AppContext = createContext<AppContextState>(contextDefaultValues);
 
@@ -63,6 +65,28 @@ export const AppProvider: React.FC = ({ children }) => {
     setSidebar(null);
   }
 
+  const handleDragEnd = (snapshot: DropResult) => {
+    console.log(snapshot)
+    const { reason, destination, source, type } = snapshot;
+    if (reason === "DROP" && destination && source) {
+      if (type === "Row") {
+        setRows((prev) => {
+          const next = prev.slice();
+          next.splice(destination.index, 0, next.splice(source.index, 1)[0]);
+          return next
+        })
+      } else if (type === "Column") {
+        setRows((prev) => {
+          const next = prev.slice();
+          const sourceRow = next.findIndex(({ id }) => id === source.droppableId);
+          const destinationRow = next.findIndex(({ id }) => id === destination.droppableId);
+          console.log(sourceRow, destinationRow);
+          return next
+        })
+      }
+    }
+  }
+
   const handleSaveSettings = (elements: HTMLFormControlsCollection, schema: Array<SettingsSchema>, ids: [string, string]) => {
     setRows((prev) => {
       const next = prev.slice();
@@ -92,7 +116,6 @@ export const AppProvider: React.FC = ({ children }) => {
         })
       }
       
-      console.log(next)
       return next;
     });
     handleCloseModal?.();
@@ -146,6 +169,7 @@ export const AppProvider: React.FC = ({ children }) => {
         handleDeleteTile,
         handleEditTile,
         handleSaveSettings,
+        handleDragEnd,
       }}
     >
       {children}
@@ -164,6 +188,7 @@ type AppContextState = {
   handleDeleteTile: ((row: string, column: string) => void) | null
   handleEditTile: ((tile: TileData, rowId: string, columnId: string) => void) | null
   handleSaveSettings: ((elements: HTMLFormControlsCollection, schema: Array<SettingsSchema>, ids: [string, string]) => void) | null
+  handleDragEnd: ((snapshot: DropResult) => void) | null
 }
 
 export type TileData = {

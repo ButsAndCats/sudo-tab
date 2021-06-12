@@ -5,12 +5,12 @@ import { Add } from "../icons/Icons";
 import { Rows } from "./Rows";
 
 export const TilesList: React.FC = () => {
-  const { editing, handleAddRow, rows } = React.useContext(AppContext);
+  const { editing, handleAddRow, handleDragEnd, rows } = React.useContext(AppContext);
 
   return (
     <>
       <DragDropContext
-        onDragEnd={(e) => console.log(e)}
+        onDragEnd={(snapshot) => handleDragEnd?.(snapshot)}
       >
         <Rows rows={rows} editing={editing} />
       </DragDropContext>
