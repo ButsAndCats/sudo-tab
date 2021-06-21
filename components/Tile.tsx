@@ -3,7 +3,7 @@ import { AppContext, Row, TileData, TileSchemas } from "../providers/AppProvider
 import { Link, LinkSchema } from "./Tiles/Link";
 import { Search, SearchSchema } from "./Tiles/Search";
 import { isLightColor } from "../utils/utils";
-import { Drag, Settings, Delete } from "../icons/Icons";
+import { Drag, Settings, Delete } from "./icons/Icons";
 import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
 
 const tileMap = {

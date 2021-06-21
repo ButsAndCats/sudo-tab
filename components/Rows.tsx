@@ -2,7 +2,7 @@ import * as React from "react";
 import { AppContext, Row } from "../providers/AppProvider";
 import { Droppable, Draggable, DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
 import { Tile } from "./Tile";
-import { Add, Drag } from "../icons/Icons";
+import { Add, Drag } from "./icons/Icons";
 
 export const Rows = ({ rows, editing }: RowsProps) => {
   return (

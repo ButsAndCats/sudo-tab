@@ -30,7 +30,7 @@ export const Controls: React.FC = () => {
 
   return (
     <div
-      className="fixed bottom-0 right-0 pr-2 pb-2"
+      className="fixed bottom-0 right-0 pr-2 pb-2 flex"
     >
       {user ? (
         <Button onClick={() => auth.signOut()}

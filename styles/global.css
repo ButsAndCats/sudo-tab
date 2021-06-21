@@ -25,7 +25,6 @@
   --white: #ffffff;
 }
 
-
 html, body {
   background-color: var(--black);
   color: var(--gray-lightest);

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SettingsSchema } from "../../types";
 import { isLightColor } from "../../utils/utils";
-import * as Icons from "../../icons/Icons";
+import * as Icons from "../icons/Icons";
 import { TextInput } from "../SettingsForm/TextInput";
 
 export const defaultSchema: SearchSchema = {

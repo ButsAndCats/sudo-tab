@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AppContext } from "../providers/AppProvider";
 import { DragDropContext } from "react-beautiful-dnd";
-import { Add } from "../icons/Icons";
+import { Add } from "./icons/Icons";
 import { Rows } from "./Rows";
 
 export const TilesList: React.FC = () => {
