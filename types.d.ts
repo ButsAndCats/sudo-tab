@@ -1,5 +1,6 @@
-export type SettingsSchema = SettingsSchema.Header | SettingsSchema.Color | SettingsSchema.Text | SettingsSchema.Select
+export type Maybe<T> = T | undefined 
 
+export type SettingsSchema = SettingsSchema.Header | SettingsSchema.Color | SettingsSchema.Text | SettingsSchema.Select
 export namespace SettingsSchema {
   export type Header = {
     type: "header"

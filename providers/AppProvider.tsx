@@ -66,7 +66,6 @@ export const AppProvider: React.FC = ({ children }) => {
   }
 
   const handleDragEnd = (snapshot: DropResult) => {
-    console.log(snapshot)
     const { reason, destination, source, type } = snapshot;
     if (reason === "DROP" && destination && source) {
       if (type === "Row") {
@@ -155,7 +154,7 @@ export const AppProvider: React.FC = ({ children }) => {
       ]
     }])
   }
-  console.log(handleSaveSettings)
+
   return (
     <AppContext.Provider
       value={{
