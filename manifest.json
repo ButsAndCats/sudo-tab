@@ -6,12 +6,20 @@
     "newtab": "index.html"
   },
   "version": "0.0.1",
-  "permissions": ["storage", "indentity", "chrome://favicon/"],
+  "permissions": ["storage", "identity", "chrome://favicon/"],
   "optional_permissions": ["tabs", "topSites", "management", "bookmarks"],
   "manifest_version": 2,
   "icons": {
     "200": "images/icon200.png",
     "128": "images/icon128.png",
     "19":"images/icon19.png"
-  }
+  },
+  "oauth2": {
+    "client_id": "473342681499-q403lpsp3ej4mmnotk2ktmjos3sdlr5v.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3YLT2cJQvzR1C093tVPsaY1Kub2vP4+HLnGgHY/uou2X3jxfLRfrP4AsH15HvCleVUoam+M1dG02NWACMMq5Ma7zc2Miep7wisDd/fNDMyEpsp/fS+wYpXcg0JxiOW7xd3FB1BdVdnA2qlD4LxCqRS7qBCJ4KkbW0girURyF7mpoZD2Y0N4Dm2wyXHi8fIjY4nZIKrRN9kXr7GP3wxCe70Fs88qMfNozhOieRmDsR2Zb2KK+ToMyQH/zZ4/K9FCrSYp0SXMoj03Bxcc3MOZB+MfD4fLNPpp0UQIgOj5PjggWg31/v9bJpP1NUcWdMg3Q//pNT8E9HicgMxFXR+UttQIDAQAB"
 }

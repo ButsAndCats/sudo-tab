@@ -1,13 +1,11 @@
 import router from "next/dist/client/router";
 import React, { useEffect } from "react";
-import { auth, googleAuthProvider } from "../lib/firebase"
-import { AuthContext } from "../providers/AuthProvider";
 import { Button } from "../components/Button";
 import { GoogleIcon } from "../components/icons/Icons";
+import { FirebaseContext } from "../providers/FirebaseProvider";
 
-export default function SignupPage({ }) {
-  const { user } = React.useContext(AuthContext);
-
+export default function SignupPage() {
+  const { user } = React.useContext(FirebaseContext);
   useEffect(() => {
     if (user) {
       router.push('/')
@@ -24,8 +22,9 @@ export default function SignupPage({ }) {
 }
 
 const GoogleSignUpButton: React.FC = () => {
+  const { handleAuth } = React.useContext(FirebaseContext);
   const signInWithGoogle = async () => {
-    await auth.signInWithPopup(googleAuthProvider);
+    await handleAuth?.()
   }
   return (
     <Button colour="google" onClick={() => signInWithGoogle()} className="flex items-center pl-2">
@@ -33,4 +32,3 @@ const GoogleSignUpButton: React.FC = () => {
     </Button>
   )
 }
-
