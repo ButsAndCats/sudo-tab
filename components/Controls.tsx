@@ -22,7 +22,7 @@ export const Controls: React.FC = () => {
         });
         await batch.commit();
       } else {
-        router.push("/login")
+        router.push("/signup")
       }
     }
     setEditing?.((prev) => !prev);

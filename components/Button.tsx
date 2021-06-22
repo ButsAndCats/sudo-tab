@@ -30,5 +30,5 @@ export const Button: React.FC<Props> = ({ children, active, className, href, col
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   active?: boolean
   href?: string
-  colour?: keyof colours
+  colour?: "base" | "aside" | "google"
 }
