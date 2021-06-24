@@ -9,6 +9,7 @@ import { getTileSettingsSchema } from "../utils/utils";
 import { SettingsSchema } from "../types";
 import { SearchSchema } from "../components/Tiles/Search";
 import { DropResult } from "react-beautiful-dnd";
+import { StickySchema } from "../components/Tiles/Sticky";
 
 const contextDefaultValues = {
   sidebar: null,
@@ -197,11 +198,12 @@ export type TileData = {
 
 export type Adding = [string, string];
 
-export type TileSchemas = TileSchemas.Link | TileSchemas.Search
+export type TileSchemas = TileSchemas.Link | TileSchemas.Search | TileSchemas.Sticky
 
 export namespace TileSchemas {
   export type Link = LinkSchema
   export type Search = SearchSchema
+  export type Sticky = StickySchema
 }
 
 export type Row = {

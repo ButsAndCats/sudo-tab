@@ -2,9 +2,10 @@ import * as React from "react";
 import { AppContext } from "../providers/AppProvider";
 import * as Link from "./Tiles/Link";
 import * as Search from "./Tiles/Search";
+import * as Sticky from "./Tiles/Sticky";
 import { Button } from "./Button";
 
-const tiles = [Link.defaultSchema, Search.defaultSchema]
+const tiles = [Link.defaultSchema, Search.defaultSchema, Sticky.defaultSchema]
 export const Aside: React.FC = () => {
   const { sidebar, setSidebar, handleAddNewTile } = React.useContext(AppContext);
   return (

@@ -1,7 +1,7 @@
 import router from "next/dist/client/router";
 import React, { useEffect } from "react";
 import { Button } from "../components/Button";
-import { GoogleIcon } from "../components/icons/Icons";
+import { Google } from "../components/icons/Icons";
 import { FirebaseContext } from "../providers/FirebaseProvider";
 
 export default function SignupPage() {
@@ -28,7 +28,7 @@ const GoogleSignUpButton: React.FC = () => {
   }
   return (
     <Button colour="google" onClick={() => signInWithGoogle()} className="flex items-center pl-2">
-      <GoogleIcon /><span className="pl-4">Sign in with Google</span>
+      <Google /><span className="pl-4">Sign in with Google</span>
     </Button>
   )
 }
