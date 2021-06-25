@@ -1,6 +1,6 @@
 
 export const Add: React.FC<Props> = ({ size = 32 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size}>
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 32 32">
     <path fill="currentColor" d="M30 14H18V2h-4v12H2v4h12v12h4V18h12v-4z" />
   </svg>
 )

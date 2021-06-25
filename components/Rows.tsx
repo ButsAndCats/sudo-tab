@@ -93,7 +93,7 @@ const DraggableRow = ({ row, editing, handle }: RowProps) => {
           </div>
         )}
       </Droppable>
-      <RowHandle editing={editing} handle={handle} />
+      <RowControls editing={editing} handle={handle} row={row} />
     </div>
   )
 }
@@ -104,18 +104,24 @@ type RowProps = {
   handle?: DraggableProvidedDragHandleProps
 }
 
-const RowHandle = ({ editing, handle }: HandleProps) => {
+const RowControls = ({ editing, handle, row }: RowProps) => {
+  const { handleAddNewBlankTile } = React.useContext(AppContext);
   return (
     <div 
-      {...handle}
-      className={editing ? "transition absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 bg-black p-2 border-4 border-gray text-gray hover:text-gray-lightest hover:border-gray-lightest hover:bg-blue rounded-lg" : "hidden"}
+      className={editing ? "transition absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 flex flex-col space-y-2" : "hidden"}
     >
-      <Drag size={24} />
+      <RowButton {...handle}>
+        <Drag size={24} />
+      </RowButton>
+      <RowButton onClick={() => handleAddNewBlankTile(row.id)}>
+        <Add size={24}/>
+      </RowButton>
     </div>
   )
 }
 
-type HandleProps = {
-  editing: boolean
-  handle?: DraggableProvidedDragHandleProps
-}
+const RowButton: React.FC<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>> = ({ children, ...props }) => (
+  <button className="bg-black p-2 border-4 border-gray text-gray hover:text-gray-lightest hover:border-gray-lightest hover:bg-blue rounded-lg" {...props}>
+    {children}
+  </button>
+)

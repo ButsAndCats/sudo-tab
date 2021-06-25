@@ -6,32 +6,33 @@ import { ModalContext } from "./ModalProvider";
 import { SettingsForm } from "../components/SettingsForm/SettingsForm";
 import { LinkSchema } from "../components/Tiles/Link";
 import { getTileSettingsSchema } from "../utils/utils";
-import { SettingsSchema } from "../types";
+import { Maybe, SettingsSchema } from "../types";
 import { SearchSchema } from "../components/Tiles/Search";
 import { DropResult } from "react-beautiful-dnd";
 import { StickySchema } from "../components/Tiles/Sticky";
 
 const contextDefaultValues = {
-  sidebar: null,
-  setSidebar: null,
+  sidebar: undefined,
+  setSidebar: undefined,
   editing: false,
-  setEditing: null,
-  handleAddNewTile: null,
+  setEditing: undefined,
+  handleAddNewTile: undefined,
   tiles: [],
-  setTiles: null,
+  setTiles: undefined,
   rows: [],
-  handleAddRow: null,
-  handleDeleteTile: null,
-  handleEditTile: null,
-  handleSaveSettings: null,
-  handleDragEnd: null
+  handleAddRow: undefined,
+  handleDeleteTile: undefined,
+  handleEditTile: undefined,
+  handleSaveSettings: undefined,
+  handleDragEnd: undefined,
+  handleAddNewBlankTile: undefined,
 }
 export const AppContext = createContext<AppContextState>(contextDefaultValues);
 
 export const AppProvider: React.FC = ({ children }) => {
-  const [rows, setRows] = useState<Array<Row>>([]);
-  const [sidebar, setSidebar] = useState<Adding | null>(contextDefaultValues.sidebar);
-  const [editing, setEditing] = useState<boolean>(contextDefaultValues.editing);
+  const [rows, setRows] = useState<AppContextState["rows"]>([]);
+  const [sidebar, setSidebar] = useState<AppContextState["sidebar"]>(contextDefaultValues.sidebar);
+  const [editing, setEditing] = useState<AppContextState["editing"]>(contextDefaultValues.editing);
   const { handleShowModal, handleCloseModal } = React.useContext(ModalContext);
 
   useEffect(() => {
@@ -63,7 +64,19 @@ export const AppProvider: React.FC = ({ children }) => {
       return next
     });
 
-    setSidebar(null);
+    setSidebar(undefined);
+  }
+
+  /**
+   * Add a new empty tile to the end of the current row
+   */
+  const handleAddNewBlankTile = (rowId: string) => {
+    setRows((prev) => {
+      const next = prev.slice();
+      const row = rows.findIndex(({ id }) => id === rowId);
+      next[row].columns = [...next[row].columns, { id:  uuidv4(), tile: null }]
+      return next
+    })
   }
 
   const handleDragEnd = (snapshot: DropResult) => {
@@ -80,7 +93,6 @@ export const AppProvider: React.FC = ({ children }) => {
           const next = prev.slice();
           const sourceRow = next.findIndex(({ id }) => id === source.droppableId);
           const destinationRow = next.findIndex(({ id }) => id === destination.droppableId);
-          console.log(sourceRow, destinationRow);
           return next
         })
       }
@@ -164,6 +176,7 @@ export const AppProvider: React.FC = ({ children }) => {
         editing,
         setEditing,
         handleAddNewTile,
+        handleAddNewBlankTile,
         handleAddRow,
         rows,
         handleDeleteTile,
@@ -178,17 +191,18 @@ export const AppProvider: React.FC = ({ children }) => {
 }
 
 type AppContextState = {
-  sidebar: Adding | null
-  setSidebar: React.Dispatch<React.SetStateAction<Adding | null>> | null
+  sidebar: Maybe<Adding>
+  setSidebar: Maybe<React.Dispatch<React.SetStateAction<AppContextState["sidebar"]>>>
   editing: boolean
-  setEditing: React.Dispatch<React.SetStateAction<boolean>> | null
-  handleAddNewTile: ((tile: TileSchemas) => void) | null
+  setEditing: Maybe<React.Dispatch<React.SetStateAction<boolean>>>
+  handleAddNewTile: Maybe<((tile: TileSchemas) => void)>
   rows: Array<Row>
-  handleAddRow: (() => void) | null
-  handleDeleteTile: ((row: string, column: string) => void) | null
-  handleEditTile: ((tile: TileData, rowId: string, columnId: string) => void) | null
-  handleSaveSettings: ((elements: HTMLFormControlsCollection, schema: Array<SettingsSchema>, ids: [string, string]) => void) | null
-  handleDragEnd: ((snapshot: DropResult) => void) | null
+  handleAddRow: Maybe<(() => void)>
+  handleDeleteTile: Maybe<((row: string, column: string) => void)>
+  handleEditTile: Maybe<((tile: TileData, rowId: string, columnId: string) => void)>
+  handleSaveSettings: Maybe<((elements: HTMLFormControlsCollection, schema: Array<SettingsSchema>, ids: [string, string]) => void)>
+  handleDragEnd: Maybe<((snapshot: DropResult) => void)>
+  handleAddNewBlankTile: Maybe<((rowId: string) => void)>
 }
 
 export type TileData = {
