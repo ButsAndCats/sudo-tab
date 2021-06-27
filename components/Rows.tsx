@@ -2,7 +2,7 @@ import * as React from "react";
 import { AppContext, Row } from "../providers/AppProvider";
 import { Droppable, Draggable, DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
 import { Tile } from "./Tile";
-import { Add, Drag } from "./icons/Icons";
+import { Add, Delete, Drag } from "./icons/Icons";
 
 export const Rows = ({ rows, editing }: RowsProps) => {
   return (
@@ -105,7 +105,7 @@ type RowProps = {
 }
 
 const RowControls = ({ editing, handle, row }: RowProps) => {
-  const { handleAddNewBlankTile } = React.useContext(AppContext);
+  const { handleAddNewBlankTile, handleDeleteRow } = React.useContext(AppContext);
   return (
     <div 
       className={editing ? "transition absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 flex flex-col space-y-2" : "hidden"}
@@ -113,8 +113,11 @@ const RowControls = ({ editing, handle, row }: RowProps) => {
       <RowButton {...handle}>
         <Drag size={24} />
       </RowButton>
-      <RowButton onClick={() => handleAddNewBlankTile(row.id)}>
+      <RowButton onClick={() => handleAddNewBlankTile?.(row.id)}>
         <Add size={24}/>
+      </RowButton>
+      <RowButton onClick={() => handleDeleteRow?.(row.id)}>
+        <Delete size={24}/>
       </RowButton>
     </div>
   )

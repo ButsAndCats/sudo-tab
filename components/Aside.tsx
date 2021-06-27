@@ -10,7 +10,7 @@ export const Aside: React.FC = () => {
   const { sidebar, setSidebar, handleAddNewTile } = React.useContext(AppContext);
   return (
     <aside className={`fixed inset-0 transition ${sidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-      <div className="bg-gray opacity-40 absolute inset-0" onClick={() => setSidebar?.(null)}/>
+      <div className="bg-gray opacity-40 absolute inset-0" onClick={() => setSidebar?.(undefined)}/>
       <div className={`absolute inset-y-0 left-0 bg-gray p-4 transition transform ${sidebar ? "translate-x-0" : "-translate-x-full"} z-10`}>
         <div>
           <h3 className="text-xl mb-4 font-bold">Choose a tile</h3>

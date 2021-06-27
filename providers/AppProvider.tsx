@@ -21,6 +21,7 @@ const contextDefaultValues = {
   setTiles: undefined,
   rows: [],
   handleAddRow: undefined,
+  handleDeleteRow: undefined,
   handleDeleteTile: undefined,
   handleEditTile: undefined,
   handleSaveSettings: undefined,
@@ -168,6 +169,15 @@ export const AppProvider: React.FC = ({ children }) => {
     }])
   }
 
+  const handleDeleteRow = (rowId: string) => {
+    setRows((prev) => {
+      const next = prev.slice();
+      const row = prev.findIndex((r) => r.id === rowId);
+      next.splice(row, 1)
+      return next
+    });
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -178,6 +188,7 @@ export const AppProvider: React.FC = ({ children }) => {
         handleAddNewTile,
         handleAddNewBlankTile,
         handleAddRow,
+        handleDeleteRow,
         rows,
         handleDeleteTile,
         handleEditTile,
@@ -199,6 +210,7 @@ type AppContextState = {
   rows: Array<Row>
   handleAddRow: Maybe<(() => void)>
   handleDeleteTile: Maybe<((row: string, column: string) => void)>
+  handleDeleteRow: Maybe<((rowId: string) => void)>
   handleEditTile: Maybe<((tile: TileData, rowId: string, columnId: string) => void)>
   handleSaveSettings: Maybe<((elements: HTMLFormControlsCollection, schema: Array<SettingsSchema>, ids: [string, string]) => void)>
   handleDragEnd: Maybe<((snapshot: DropResult) => void)>
