@@ -27,6 +27,7 @@ const contextDefaultValues = {
   handleSaveSettings: undefined,
   handleDragEnd: undefined,
   handleAddNewBlankTile: undefined,
+  handleDeleteBlankTile: undefined,
 }
 export const AppContext = createContext<AppContextState>(contextDefaultValues);
 
@@ -58,7 +59,6 @@ export const AppProvider: React.FC = ({ children }) => {
       next[row].columns[column].tile = newTile
       const settingsSchema = getTileSettingsSchema(tile.type);
       if (settingsSchema && handleShowModal && sidebar) {
-        console.log(settingsSchema)
         handleShowModal(<SettingsForm schema={settingsSchema} data={newTile} ids={sidebar} handleSaveSettings={handleSaveSettings} />)
       }
       
@@ -155,6 +155,16 @@ export const AppProvider: React.FC = ({ children }) => {
       return next
     });
   }
+
+  const handleDeleteBlankTile = (rowId: string, columnId: string) => {
+    setRows((prev) => {
+      const next = prev.slice();
+      const row = next.findIndex((r) => r.id === rowId);
+      const column = next[row].columns.findIndex((c) => c.id === columnId);
+      next[row].columns.splice(column, 1)
+      return next
+    });
+  }
   
   const handleAddRow = () => {
     setRows((prev) => [...prev, {
@@ -187,6 +197,7 @@ export const AppProvider: React.FC = ({ children }) => {
         setEditing,
         handleAddNewTile,
         handleAddNewBlankTile,
+        handleDeleteBlankTile,
         handleAddRow,
         handleDeleteRow,
         rows,
@@ -210,6 +221,7 @@ type AppContextState = {
   rows: Array<Row>
   handleAddRow: Maybe<(() => void)>
   handleDeleteTile: Maybe<((row: string, column: string) => void)>
+  handleDeleteBlankTile: Maybe<((row: string, column: string) => void)>
   handleDeleteRow: Maybe<((rowId: string) => void)>
   handleEditTile: Maybe<((tile: TileData, rowId: string, columnId: string) => void)>
   handleSaveSettings: Maybe<((elements: HTMLFormControlsCollection, schema: Array<SettingsSchema>, ids: [string, string]) => void)>

@@ -27,14 +27,14 @@ export const Tile: React.FC<Props> = ({ id, tile, row, handle }) => {
       <div className={`absolute inset-0 ${editing ? "block" : "hidden"}`}>
         <button
           {...handle}
-          className={`p-1 absolute top-0 left-0 outline-none focus:outline-none`}
+          className={`p-4 absolute top-0 left-0 outline-none focus:outline-none`}
         >
           <Drag size={24} />
         </button>
-        <button className="p-1 absolute bottom-0 right-0 outline-none focus:outline-none" onClick={() => handleDeleteTile?.(row.id, id)}>
+        <button className="p-4 absolute bottom-0 right-0 outline-none focus:outline-none" onClick={() => handleDeleteTile?.(row.id, id)}>
           <Delete size={24} />
         </button>
-        <button className="p-1 absolute top-0 right-0 outline-none focus:outline-none" onClick={() => handleEditTile?.(tile, row.id, id)}>
+        <button className="p-4 absolute top-0 right-0 outline-none focus:outline-none" onClick={() => handleEditTile?.(tile, row.id, id)}>
           <Settings size={24} />
         </button>
       </div>

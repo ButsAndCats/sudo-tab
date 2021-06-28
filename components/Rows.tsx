@@ -42,7 +42,7 @@ type RowsProps = {
 }
 
 const DraggableRow = ({ row, editing, handle }: RowProps) => {
-  const { setSidebar } = React.useContext(AppContext);
+  const { setSidebar, handleDeleteBlankTile } = React.useContext(AppContext);
   return (
     <div
       className={`
@@ -75,13 +75,29 @@ const DraggableRow = ({ row, editing, handle }: RowProps) => {
                       </div>
                     ) : (
                       <button
-                        {...provided.dragHandleProps}
                         type="button"
-                        className={`${editing ? "px-1 outline-none focus:outline-none" : "invisible opacity-0 pointer-events-none"} transition`}
+                        className={`${editing ? "px-1 outline-none focus:outline-none" : "invisible opacity-0 pointer-events-none"} transition text-gray`}
                         onClick={() => setSidebar?.([row.id, id])}
                       >
-                        <div className="transition border-4 border-dashed border-gray text-gray hover:border-gray-light hover:text-gray-light rounded-lg h-full flex items-center justify-center">
+                        <div className="transition border-4 border-dashed border-gray hover:border-gray-light hover:text-gray-light rounded-lg h-full flex items-center justify-center">
                           <Add />
+                        </div>
+                        <div className={`absolute inset-0`}>
+                          <button
+                            {...provided.dragHandleProps}
+                            className={`p-4 absolute top-0 left-0 hover:text-gray-light outline-none focus:outline-none`}
+                          >
+                            <Drag size={24} />
+                          </button>
+                          <button
+                            className="p-4 absolute bottom-0 right-0 hover:text-gray-light outline-none focus:outline-none"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteBlankTile?.(row.id, id)
+                            }}
+                          >
+                            <Delete size={24} />
+                          </button>
                         </div>
                       </button>
                     )}
