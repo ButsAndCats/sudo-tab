@@ -2,9 +2,7 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { AppContext } from "../providers/AppProvider";
 import { FirebaseContext } from "../providers/FirebaseProvider";
-import { Maybe } from "../types";
 import { Button } from "./Button";
-import { Link } from "./Tiles/Link";
 
 export const Controls: React.FC = () => {
   const router = useRouter()

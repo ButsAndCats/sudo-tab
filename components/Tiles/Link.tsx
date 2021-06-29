@@ -7,7 +7,7 @@ export const defaultSchema: LinkSchema = {
   type: "Link",
   hex: `#${Math.floor(Math.random()*16777215).toString(16)}`,
   url: "https://google.com",
-  icon: "Settings"
+  icon: "Favicon"
 }
 
 export const schema: Array<SettingsSchema> = [
@@ -29,10 +29,16 @@ export const schema: Array<SettingsSchema> = [
     type: "select",
     id: "icon",
     label: "Icon",
-    options: Object.keys(Icons).map((i) => ({
-      value: i,
-      label: i
-    }))
+    options: [
+      {
+        value: "Favicon",
+        label: "Favicon"
+      },
+      ...Object.keys(Icons).map((i) => ({
+        value: i,
+        label: i
+      }))
+    ]
   }
 ]
 
@@ -46,7 +52,9 @@ export const Link: React.FC<Props> = ({ hex, url, icon }) => {
       }}
     >
       <div>
-        {Icons[icon]?.({})}
+        {icon === "Favicon" ? (
+          <img className="h-8 w-8" src={`chrome://favicon/size/32/${url}`} sizes="32x32"/>
+        ) : Icons[icon]?.({})}
       </div>
     </a>
   )
@@ -58,5 +66,5 @@ export type LinkSchema = {
   type: "Link"
   hex: string
   url: string
-  icon: "Settings"
+  icon: "Favicon" | "Settings"
 }
