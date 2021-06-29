@@ -1,15 +1,16 @@
 import React, { useState, useEffect, createContext } from "react"
 import * as Store from "store"
 import { v4 as uuidv4 } from "uuid";
+import { DropResult } from "react-beautiful-dnd";
 import { CONFIG_NAMESPACE } from "../utils/constants";
 import { ModalContext } from "./ModalProvider";
-import { SettingsForm } from "../components/SettingsForm/SettingsForm";
-import { LinkSchema } from "../components/Tiles/Link";
 import { getTileSettingsSchema } from "../utils/utils";
 import { Maybe, SettingsSchema } from "../types";
+import { SettingsForm } from "../components/SettingsForm/SettingsForm";
+import { LinkSchema } from "../components/Tiles/Link";
 import { SearchSchema } from "../components/Tiles/Search";
-import { DropResult } from "react-beautiful-dnd";
 import { StickySchema } from "../components/Tiles/Sticky";
+import { RSSSchema } from "../components/Tiles/RSS";
 
 const contextDefaultValues = {
   sidebar: undefined,
@@ -236,12 +237,13 @@ export type TileData = {
 
 export type Adding = [string, string];
 
-export type TileSchemas = TileSchemas.Link | TileSchemas.Search | TileSchemas.Sticky
+export type TileSchemas = TileSchemas.Link | TileSchemas.Search | TileSchemas.Sticky | TileSchemas.RSS
 
 export namespace TileSchemas {
   export type Link = LinkSchema
   export type Search = SearchSchema
   export type Sticky = StickySchema
+  export type RSS = RSSSchema
 }
 
 export type Row = {

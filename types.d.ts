@@ -29,3 +29,10 @@ export namespace SettingsSchema {
     }>
   }
 }
+
+export type TileSchemaMap = {
+  Link: Array<SettingsSchema>
+  Search: Array<SettingsSchema>
+  Sticky: Array<SettingsSchema>
+  RSS: Array<SettingsSchema>
+}

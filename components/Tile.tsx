@@ -3,6 +3,7 @@ import { AppContext, Row, TileData, TileSchemas } from "../providers/AppProvider
 import { Link } from "./Tiles/Link";
 import { Search } from "./Tiles/Search";
 import { Sticky } from "./Tiles/Sticky";
+import { RSS } from "./Tiles/RSS";
 import { isLightColor } from "../utils/utils";
 import { Drag, Settings, Delete } from "./icons/Icons";
 import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
@@ -11,6 +12,7 @@ const tileMap = {
   Link: (props: TileSchemas.Link) => <Link {...props} />,
   Search: (props: TileSchemas.Search) => <Search {...props} />,
   Sticky: (props: TileSchemas.Sticky) => <Sticky {...props} />,
+  RSS: (props: TileSchemas.RSS) => <RSS {...props} />,
 }
 
 export const Tile: React.FC<Props> = ({ id, tile, row, handle }) => {
