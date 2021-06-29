@@ -29,6 +29,12 @@ export const Settings: React.FC<Props> = ({ size = 32 }) => (
   </svg>
 )
 
+export const Back: React.FC<Props> = ({ size = 32 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 32 32">
+    <path fill="currentColor" d="M15 10.009V3a1 1 0 00-1.679-.735l-13 12a1 1 0 000 1.47l13 12A1 1 0 0015 27v-6.988c11.671.292 13.7 5.717 15.063 9.339A1 1 0 0032 29c0-16.1-8.044-18.817-17-18.991z" />
+  </svg>
+)
+
 export const SVG: React.FC<Props> = ({ size = 32 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 32 32">
     <g fill="currentColor" stroke="currentColor" strokeLinecap="square" strokeWidth="2">

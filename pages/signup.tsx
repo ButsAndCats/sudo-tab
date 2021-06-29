@@ -1,7 +1,8 @@
 import router from "next/dist/client/router";
+import Link from "next/link";
 import React, { useEffect } from "react";
 import { Button } from "../components/Button";
-import { Google } from "../components/icons/Icons";
+import { Back, Google } from "../components/icons/Icons";
 import { FirebaseContext } from "../providers/FirebaseProvider";
 
 export default function SignupPage() {
@@ -14,6 +15,11 @@ export default function SignupPage() {
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-4">
+      <Link href="/">
+        <a className="flex items-center mb-4">
+          <Back size={12} /><span className="pl-2">Back</span>
+        </a>
+      </Link>
       <h1 className="text-4xl font-bold mb-4">Sign up or login</h1>
       <p className="mb-4">Login with Google to use your new tab settings across multiple browsers.</p>
       <GoogleSignUpButton />
