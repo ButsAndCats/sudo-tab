@@ -2,11 +2,12 @@ import * as React from "react";
 import { SettingsSchema } from "../../types";
 import { isLightColor } from "../../utils/utils";
 
-export const defaultSchema: StickySchema = {
+export const defaults: StickySchema = {
   type: "Sticky",
   hex: `#${Math.floor(Math.random()*16777215).toString(16)}`,
   text: "",
 }
+export const defaultSchema: StickySchema = Object.assign({}, defaults)
 
 export const schema: Array<SettingsSchema> = [
   {

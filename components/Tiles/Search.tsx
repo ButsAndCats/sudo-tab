@@ -4,10 +4,11 @@ import { isLightColor } from "../../utils/utils";
 import * as Icons from "../icons/Icons";
 import { TextInput } from "../SettingsForm/TextInput";
 
-export const defaultSchema: SearchSchema = {
+export const defaults: SearchSchema = {
   type: "Search",
   hex: `#${Math.floor(Math.random()*16777215).toString(16)}`,
 }
+export const defaultSchema: SearchSchema = Object.assign({}, defaults)
 
 export const schema: Array<SettingsSchema> = [
   {

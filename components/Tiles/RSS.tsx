@@ -3,12 +3,12 @@ import { SettingsSchema } from "../../types";
 import { isLightColor } from "../../utils/utils";
 import Parser from "rss-parser";
 
-export const defaultSchema: RSSSchema = {
+const defaults: RSSSchema = {
   type: "RSS",
   hex: `#${Math.floor(Math.random()*16777215).toString(16)}`,
   url: "https://dev.to/feed",
-  icon: "Favicon"
 }
+export const defaultSchema: RSSSchema = Object.assign({}, defaults)
 
 const parser: Parser = new Parser();
 
@@ -35,6 +35,7 @@ export const RSS: React.FC<Props> = ({ hex, url }) => {
   React.useEffect(() => {
     const getFeed = async () => {
       try {
+        setError(undefined)
         const _feed = await parser.parseURL(url);
         setFeed(_feed)
       } catch (err) {
@@ -44,7 +45,6 @@ export const RSS: React.FC<Props> = ({ hex, url }) => {
     getFeed();
   }, [url])
 
-  console.log(feed);
   return (
     <a
       href={url}
@@ -94,7 +94,6 @@ export type RSSSchema = {
   type: "RSS"
   hex: string
   url: string
-  icon: "Favicon" | "Settings"
 }
 
 type Feed = {

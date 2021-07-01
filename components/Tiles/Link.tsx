@@ -3,12 +3,13 @@ import { SettingsSchema } from "../../types";
 import { isLightColor } from "../../utils/utils";
 import * as Icons from "../icons/Icons";
 
-export const defaultSchema: LinkSchema = {
+const defaults = {
   type: "Link",
   hex: `#${Math.floor(Math.random()*16777215).toString(16)}`,
   url: "https://google.com",
   icon: "Favicon"
 }
+export const defaultSchema = Object.assign({}, defaults)
 
 export const schema: Array<SettingsSchema> = [
   {
