@@ -1,7 +1,7 @@
 import * as React from "react";
-import { SettingsSchema } from "../../types";
+import { FirebaseContext } from "../../providers/FirebaseProvider";
+import { Feed, SettingsSchema } from "../../types";
 import { isLightColor } from "../../utils/utils";
-import Parser from "rss-parser";
 
 const defaults: RSSSchema = {
   type: "RSS",
@@ -10,8 +10,6 @@ const defaults: RSSSchema = {
 }
 export const defaultSchema: RSSSchema = Object.assign({}, defaults)
 
-const parser: Parser = new Parser();
-
 export const schema: Array<SettingsSchema> = [
   {
     type: "header",
@@ -19,7 +17,7 @@ export const schema: Array<SettingsSchema> = [
   },
   {
     type: "hex",
-    id: "hex",
+    id: "hex",  
     label: "Colour",
   },
   {
@@ -30,20 +28,24 @@ export const schema: Array<SettingsSchema> = [
 ]
 
 export const RSS: React.FC<Props> = ({ hex, url }) => {
+  const { getFeed } = React.useContext(FirebaseContext)
   const [feed, setFeed] = React.useState<Feed>();
   const [error, setError] = React.useState<string>();
+
   React.useEffect(() => {
-    const getFeed = async () => {
-      try {
-        setError(undefined)
-        const _feed = await parser.parseURL(url);
-        setFeed(_feed)
-      } catch (err) {
-        setError("Unable to connect with this feed, perhaps there was a mistake with the URL?");
-      }
+    if (getFeed && url?.length) {
+      (async () => {
+        try {
+          setError(undefined)
+          const _feed = await getFeed(url);
+          console.log(_feed);
+          setFeed(_feed);
+        } catch (err) {
+          setError("Unable to connect with this feed, perhaps there was a mistake with the URL?");
+        }
+      })()
     }
-    getFeed();
-  }, [url])
+  }, [url, getFeed])
 
   return (
     <a
@@ -96,8 +98,3 @@ export type RSSSchema = {
   url: string
 }
 
-type Feed = {
-  [key: string]: any;
-} & Parser.Output<{
-  [key: string]: any;
-}>

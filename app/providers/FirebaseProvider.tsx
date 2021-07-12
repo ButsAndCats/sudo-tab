@@ -1,10 +1,13 @@
 import * as React from "react";
+
+import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "firebase/app"
 import "firebase/auth"
 import "firebase/firestore"
 import "firebase/storage"
-import { Maybe } from "../types";
-import { useAuthState } from "react-firebase-hooks/auth";
+
+import { Feed, Maybe } from "../types";
+import { FUNCTIONS_URL } from "../../shared/constants";
 
 const contextDefaultValues = {
   auth: undefined,
@@ -15,6 +18,7 @@ const contextDefaultValues = {
   handleAuth: () => {
     console.error('handleAuth is not defined');
   },
+  getFeed: undefined,
 }
 
 export const FirebaseContext = React.createContext<FirebaseContextState>(contextDefaultValues);
@@ -32,7 +36,6 @@ export const FirebaseProvider: React.FC = ({ children }) => {
     const _googleAuthProvider = new firebase.auth.GoogleAuthProvider()
     const _firestore = firebase.firestore()
     const _storage = firebase.storage()
-    console.log(firebase)
     setAuth(_auth)
     setGoogleAuthProvider(_googleAuthProvider);
     setFirestore(_firestore)
@@ -69,6 +72,20 @@ export const FirebaseProvider: React.FC = ({ children }) => {
     
   }, [auth, googleAuthProvider]);
 
+  const getFeed = async (url: string) => {
+    // var xhr = new XMLHttpRequest();
+    // const handleStateChange = (res) => {
+    //   console.log(res)
+    // }
+    // xhr.onreadystatechange = handleStateChange; // Implemented elsewhere.
+    // xhr.open("GET", '/config_resources/config.json'), true);
+    // xhr.send();
+    const feed = await fetch(`${FUNCTIONS_URL}/feed?url=${url}`);
+    const json = await feed.json();
+    console.log(json);
+    return json;
+  }
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -78,6 +95,7 @@ export const FirebaseProvider: React.FC = ({ children }) => {
         storage,
         user,
         handleAuth,
+        getFeed,
       }}
     >
       {loaded ? children : null}
@@ -92,4 +110,5 @@ type FirebaseContextState = {
   storage: Maybe<firebase.storage.Storage>
   user: Maybe<firebase.User | null>
   handleAuth: () => void
+  getFeed: Maybe<(url: string) => Promise<Feed>>
 }

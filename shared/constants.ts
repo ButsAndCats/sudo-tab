@@ -1,0 +1,1 @@
+export const FUNCTIONS_URL = "https://us-central1-sudo-tab.cloudfunctions.net";

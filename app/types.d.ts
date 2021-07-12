@@ -1,4 +1,4 @@
-export type Maybe<T> = T | undefined 
+export type Maybe<T> = T | undefined
 
 export type SettingsSchema = SettingsSchema.Header | SettingsSchema.Color | SettingsSchema.Text | SettingsSchema.Select
 export namespace SettingsSchema {
@@ -6,19 +6,19 @@ export namespace SettingsSchema {
     type: "header"
     id: string
   }
-  
+
   export type Color = {
     type: "hex"
     id: string
     label: string
   }
-  
+
   export type Text = {
     type: "text"
     id: string
     label: string
   }
-  
+
   export type Select = {
     type: "select"
     id: string
@@ -35,4 +35,12 @@ export type TileSchemaMap = {
   Search: Array<SettingsSchema>
   Sticky: Array<SettingsSchema>
   RSS: Array<SettingsSchema>
+}
+
+export type Feed = {
+  items: Array<{
+    title: string
+    categories: Array<string>
+    link: string
+  }>
 }
