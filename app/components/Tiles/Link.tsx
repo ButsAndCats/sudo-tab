@@ -7,7 +7,8 @@ const defaults: LinkSchema = {
   type: "Link",
   hex: `#${Math.floor(Math.random()*16777215).toString(16)}`,
   url: "https://google.com",
-  icon: "Favicon"
+  icon: "Favicon",
+  label: "",
 }
 export const defaultSchema: LinkSchema = Object.assign({}, defaults)
 
@@ -27,6 +28,11 @@ export const schema: Array<SettingsSchema> = [
     label: "Link"
   },
   {
+    type: "text",
+    id: "label",
+    label: "Label"
+  },
+  {
     type: "select",
     id: "icon",
     label: "Icon",
@@ -43,7 +49,7 @@ export const schema: Array<SettingsSchema> = [
   }
 ]
 
-export const Link: React.FC<Props> = ({ hex, url, icon }) => {
+export const Link: React.FC<Props> = ({ hex, url, icon, label }) => {
   return (
     <a
       href={url}
@@ -53,9 +59,14 @@ export const Link: React.FC<Props> = ({ hex, url, icon }) => {
       }}
     >
       <div>
-        {icon === "Favicon" ? (
-          <img className="h-8 w-8" src={`chrome://favicon/size/32/${url}`} sizes="32x32"/>
-        ) : Icons[icon]?.({})}
+        <div className="w-full flex justify-center">
+          {icon === "Favicon" ? (
+            <img className="h-8 w-8" src={`chrome://favicon/size/32/${url}`} sizes="32x32" />
+          ) : Icons[icon]?.({})}
+        </div>
+        {label?.length ? (
+          <p>{label}</p>
+        ) : null}
       </div>
     </a>
   )
@@ -67,5 +78,6 @@ export type LinkSchema = {
   type: "Link"
   hex: string
   url: string
+  label: string
   icon: "Favicon" | "Settings"
 }
