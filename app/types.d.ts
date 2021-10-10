@@ -1,6 +1,6 @@
 export type Maybe<T> = T | undefined
 
-export type SettingsSchema = SettingsSchema.Header | SettingsSchema.Color | SettingsSchema.Text | SettingsSchema.Select
+export type SettingsSchema = SettingsSchema.Header | SettingsSchema.Color | SettingsSchema.Text | SettingsSchema.Date | SettingsSchema.Select
 export namespace SettingsSchema {
   export type Header = {
     type: "header"
@@ -15,6 +15,12 @@ export namespace SettingsSchema {
 
   export type Text = {
     type: "text"
+    id: string
+    label: string
+  }
+
+  export type Date = {
+    type: "date"
     id: string
     label: string
   }
@@ -35,6 +41,8 @@ export type TileSchemaMap = {
   Search: Array<SettingsSchema>
   Sticky: Array<SettingsSchema>
   RSS: Array<SettingsSchema>
+  Countdown: Array<SettingsSchema>
+  SquareBreathing: Array<SettingsSchema>
 }
 
 export type Feed = {

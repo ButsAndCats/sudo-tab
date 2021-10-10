@@ -3,6 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "extension:build": "sh app/extension-build.sh"
+    "build": "sh app/extension-build.sh"
   }
 }

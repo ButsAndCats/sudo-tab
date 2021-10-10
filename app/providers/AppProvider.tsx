@@ -11,6 +11,8 @@ import { LinkSchema } from "../components/Tiles/Link";
 import { SearchSchema } from "../components/Tiles/Search";
 import { StickySchema } from "../components/Tiles/Sticky";
 import { RSSSchema } from "../components/Tiles/RSS";
+import { CountdownSchema } from "../components/Tiles/Countdown";
+import { SquareBreathingSchema } from "../components/Tiles/SquareBreathing";
 
 const contextDefaultValues = {
   sidebar: undefined,
@@ -237,13 +239,15 @@ export type TileData = {
 
 export type Adding = [string, string];
 
-export type TileSchemas = TileSchemas.Link | TileSchemas.Search | TileSchemas.Sticky | TileSchemas.RSS
+export type TileSchemas = TileSchemas.Link | TileSchemas.Search | TileSchemas.Sticky | TileSchemas.RSS | TileSchemas.Countdown | TileSchemas.SquareBreathing
 
 export namespace TileSchemas {
   export type Link = LinkSchema
   export type Search = SearchSchema
   export type Sticky = StickySchema
   export type RSS = RSSSchema
+  export type Countdown = CountdownSchema
+  export type SquareBreathing = SquareBreathingSchema
 }
 
 export type Row = {

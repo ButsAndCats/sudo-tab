@@ -4,6 +4,8 @@ import { Link } from "./Tiles/Link";
 import { Search } from "./Tiles/Search";
 import { Sticky } from "./Tiles/Sticky";
 import { RSS } from "./Tiles/RSS";
+import { Countdown } from "./Tiles/Countdown";
+import { SquareBreathing } from "./Tiles/SquareBreathing";
 import { isLightColor } from "../utils/utils";
 import { Drag, Settings, Delete } from "./icons/Icons";
 import { DraggableProvidedDragHandleProps } from "react-beautiful-dnd";
@@ -13,6 +15,8 @@ const tileMap = {
   Search: (props: TileSchemas.Search) => <Search {...props} />,
   Sticky: (props: TileSchemas.Sticky) => <Sticky {...props} />,
   RSS: (props: TileSchemas.RSS) => <RSS {...props} />,
+  Countdown: (props: TileSchemas.Countdown) => <Countdown {...props} />,
+  SquareBreathing: (props: TileSchemas.SquareBreathing) => <SquareBreathing {...props} />,
 }
 
 export const Tile: React.FC<Props> = ({ id, tile, row, handle }) => {

@@ -10,16 +10,15 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      black: 'var(--black)',
-      white: 'var(--white)',
+      black: '#202124',
+      white: '#ffffff',
       blue: {
-        DEFAULT: 'var(--blue)',
+        DEFAULT: '#6979F8',
       },
       gray: {
-        dark: 'var(--gray-dark)',
-        DEFAULT: 'var(--gray)',
-        light: 'var(--gray-light)',
-        lightest: 'var(--gray-lightest)',
+        DEFAULT: '#35363a',
+        light: '#D0C9D6',
+        lightest: '#F7F5F9',
       }
     },
   },

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { SketchPicker } from "react-color";
 import { SettingsSchema } from "../../types";
 import { InputLabel } from "./InputLabel";
 
@@ -11,10 +12,12 @@ export const HexInput: React.FC<Props> = ({ label, value, id }) => {
       <input
         value={val}
         name={id}
-        onChange={(e) => setVal(e.target.value)}
         type="text"
-        className={`border-blue focus:ring-blue w-full rounded py-3 px-4 text-black focus:shadow-lg focus:ring focus:outline-none`}
+        className="hidden"
       />
+      <SketchPicker color={val} onChange={(c) => {
+        setVal(c.hex);
+      }} />
     </>
   )
 }

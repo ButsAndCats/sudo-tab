@@ -2,6 +2,8 @@ import * as Link from "../components/Tiles/Link";
 import * as Search from "../components/Tiles/Search";
 import * as Sticky from "../components/Tiles/Sticky";
 import * as RSS from "../components/Tiles/RSS";
+import * as Countdown from "../components/Tiles/Countdown";
+import * as SquareBreathing from "../components/Tiles/SquareBreathing";
 import { SettingsSchema, TileSchemaMap } from "../types";
 
 export const isLightColor = (bgColor: string): boolean => {
@@ -20,6 +22,8 @@ export const getTileSettingsSchema = (type: keyof TileSchemaMap): Array<Settings
     Search: Search.schema,
     Sticky: Sticky.schema,
     RSS: RSS.schema,
+    Countdown: Countdown.schema,
+    SquareBreathing: SquareBreathing.schema,
   }
   return tileSchemaMap[type]
 }

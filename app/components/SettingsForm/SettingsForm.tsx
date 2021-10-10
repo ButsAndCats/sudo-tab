@@ -1,6 +1,7 @@
 import * as React from "react";
 import { SettingsSchema } from "../../types";
-import { AppContext, TileData } from "../../providers/AppProvider";
+import { TileData } from "../../providers/AppProvider";
+import { Date } from "./Date";
 import { Button } from "./Button";
 import { FormTitle } from "./FormTitle";
 import { HexInput } from "./HexInput";
@@ -12,6 +13,7 @@ const formMap: Record<string, (value: string, props: any) => JSX.Element> = {
   hex: (value: string, props: SettingsSchema.Color) => <HexInput {...props} value={value} />,
   text: (value: string, props: SettingsSchema.Text) => <TextInput {...props} value={value} />,
   select: (value: string, props: SettingsSchema.Select) => <Select {...props} value={value} />,
+  date: (value: string, props: SettingsSchema.Date) => <Date {...props} value={value} />,
 }
 
 export const SettingsForm: React.FC<Props> = ({ schema, data, ids, handleSaveSettings }) => {
@@ -31,7 +33,7 @@ export const SettingsForm: React.FC<Props> = ({ schema, data, ids, handleSaveSet
           <div className="mb-4" key={id}>
             {/*
             //@ts-ignore*/}
-            {formMap[type] ? formMap[type](data.schema[id], props) : type}
+            {formMap[type] ? formMap[type](data.schema[id], props) : `Warning! No input of type "${type}" found in form map.`}
           </div>
         );
       })}
